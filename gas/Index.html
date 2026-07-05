@@ -44,6 +44,7 @@ button{cursor:pointer;font-family:inherit;font-size:inherit;border:none;backgrou
 .login-bg{min-height:100%;display:flex;align-items:center;justify-content:center;padding:24px 16px}
 .login-card{background:#fff;border-radius:24px;padding:32px 24px;width:100%;max-width:420px;box-shadow:var(--shadow-lg)}
 .login-logo{text-align:center;margin-bottom:24px}
+.login-logo-doae{display:block;height:56px;margin:0 auto 6px}
 .login-logo-icon{font-size:56px;margin-bottom:8px}
 .login-logo-title{font-family:'Kanit',sans-serif;font-size:22px;font-weight:700;color:var(--c-primary)}
 .login-logo-sub{font-size:14px;color:var(--c-text-sub);margin-top:4px}
@@ -388,6 +389,10 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .soil-legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--c-text-sub)}
 .legend-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+.layer-color-picker{width:22px;height:22px;padding:0;border:1px solid var(--c-border);border-radius:5px;background:none;cursor:pointer;flex-shrink:0}
+.suit-legend{display:flex;flex-wrap:wrap;gap:8px;padding:2px 0 8px 24px;margin-top:-4px}
+.legend-chip{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--c-text-sub)}
+.legend-chip .legend-dot{width:10px;height:10px}
 .wms-note{font-size:11px;color:var(--c-text-mute);margin-top:6px;padding:6px 8px;background:var(--c-accent-lt);border-radius:6px;line-height:1.4}
 .geo-tooltip{font-family:'Kanit',sans-serif;font-size:13px;background:rgba(0,0,0,.75);color:#fff;border:none;border-radius:6px;padding:4px 10px;white-space:nowrap}
 /* ── UTIL ── */
@@ -876,9 +881,10 @@ button,.btn,.nav-item,.bn-item,.list-item,.tab-btn,.login-tab-btn,
   <div class="login-bg">
     <div class="login-card">
       <div class="login-logo">
+        <img class="login-logo-doae" src="https://kppdoaedev2026-eng.github.io/cassavaplot-monitor/assets/doae_logo.png" alt="กรมส่งเสริมการเกษตร" onerror="this.style.display='none'">
         <div class="login-logo-icon">🌿</div>
         <div class="login-logo-title">CassavaPlot Monitor</div>
-        <div class="login-logo-sub">สำนักงานเกษตรจังหวัดกำแพงเพชร</div>
+        <div class="login-logo-sub">สำนักงานเกษตรจังหวัดกำแพงเพชร<br>กรมส่งเสริมการเกษตร</div>
       </div>
       <div class="login-tabs login-tabs-3">
         <button class="login-tab-btn active" onclick="switchLoginTab('staff')">👔 เจ้าหน้าที่</button>
@@ -2922,13 +2928,67 @@ var _wmsLayers = {};
 // เปลี่ยน GEOJSON_BASE_URL ให้ตรงกับ repo ของคุณก่อน deploy
 var GEOJSON_BASE_URL = 'https://kppdoaedev2026-eng.github.io/cassavaplot-monitor/geojson';
 var GEO_LAYERS = {
-  province:  { name:'ขอบเขตจังหวัด กำแพงเพชร', file:'kpp_province.geojson',      color:'#1b3a6b', weight:3,   fill:false, dash:'' },
-  districts: { name:'ขอบเขตอำเภอ (11 อำเภอ)',  file:'kpp_districts.geojson',     color:'#1565c0', weight:2,   fill:false, dash:'6,4' },
-  tambons:   { name:'ขอบเขตตำบล (78 ตำบล)',    file:'kpp_tambons.geojson',        color:'#4a90e2', weight:1,   fill:false, dash:'3,4' },
-  cassava:   { name:'ความเหมาะสมมันสำปะหลัง',  file:'kpp_cassava_light.geojson',  color:null,      weight:0.5, fill:true,  dash:'' }
+  province:  { name:'ขอบเขตจังหวัด กำแพงเพชร', file:'kpp_province.geojson',  kind:'boundary', color:'#1b3a6b', weight:3, dash:'',    colorable:true },
+  districts: { name:'ขอบเขตอำเภอ (11 อำเภอ)',  file:'kpp_districts.geojson', kind:'boundary', color:'#1565c0', weight:2, dash:'6,4', colorable:true },
+  tambons:   { name:'ขอบเขตตำบล (78 ตำบล)',    file:'kpp_tambons.geojson',   kind:'boundary', color:'#4a90e2', weight:1, dash:'3,4', colorable:true },
+  cassava:   { name:'ความเหมาะสมมันสำปะหลัง', file:'kpp_cassava_light.geojson', kind:'suit', cropLabel:'มันสำปะหลัง',
+               suitColors:{ S1:'#2e7d32', S2:'#558b2f', S3:'#f9a825', N:'#c62828' } },
+  maize:     { name:'ความเหมาะสมข้าวโพด',      file:'kpp_maize_light.geojson',   kind:'suit', cropLabel:'ข้าวโพด',
+               suitColors:{ S1:'#e65100', S2:'#f57c00', S3:'#ffcc80', N:'#b71c1c' } },
+  rice:      { name:'ความเหมาะสมข้าว',          file:'kpp_rice_light.geojson',    kind:'suit', cropLabel:'ข้าว',
+               suitColors:{ S1:'#01579b', S2:'#0288d1', S3:'#81d4fa', N:'#b71c1c' } },
+  sugarcane: { name:'ความเหมาะสมอ้อย',          file:'kpp_sugarcane_light.geojson', kind:'suit', cropLabel:'อ้อย',
+               suitColors:{ S1:'#6a1b9a', S2:'#8e24aa', S3:'#ce93d8', N:'#b71c1c' } },
+  soilgroup:  { name:'กลุ่มชุดดิน',   file:'kpp_soilgroup.geojson',  kind:'soil' },
+  soilseries: { name:'ชุดดิน',        file:'kpp_soilseries.geojson', kind:'soil' },
+  registered_cassava: { name:'แปลงมันสำปะหลังขึ้นทะเบียน (กสก.)', file:'kpp_registered_cassava.geojson', kind:'area', color:'#8d6e63' },
+  schools:  { name:'โรงเรียน (อ้างอิง)', file:'kpp_schools.geojson',  kind:'point', color:'#5d4037' },
+  villages: { name:'หมู่บ้าน (อ้างอิง)', file:'kpp_villages.geojson', kind:'point', color:'#455a64' }
 };
 var _geoLayers = {};
 var _geoCache  = {};
+
+// สีเส้นขอบเขตที่ผู้ใช้ปรับเอง จะจำไว้ในเครื่องนี้ (localStorage)
+(function loadSavedGeoColors() {
+  Object.keys(GEO_LAYERS).forEach(function(k) {
+    if (!GEO_LAYERS[k].colorable) return;
+    var saved = localStorage.getItem('geoColor_' + k);
+    if (saved) GEO_LAYERS[k].color = saved;
+  });
+})();
+
+function _geoRowHtml(key) {
+  var l = GEO_LAYERS[key];
+  var swatch;
+  if (l.kind === 'suit') {
+    swatch = '<div class="layer-color" style="background:linear-gradient(135deg,'+l.suitColors.S1+' 33%,'+l.suitColors.S3+' 33% 66%,'+l.suitColors.N+' 66%)"></div>';
+  } else if (l.kind === 'soil') {
+    swatch = '<div class="layer-color" style="background:linear-gradient(135deg,#8d6e63 33%,#ffb74d 33% 66%,#6d4c41 66%)"></div>';
+  } else {
+    swatch = '<div class="layer-color" style="background:'+l.color+'"></div>';
+  }
+  var colorPicker = l.colorable
+    ? '<input type="color" class="layer-color-picker" value="'+l.color+'" oninput="setGeoColor(\''+key+'\',this.value)" title="เปลี่ยนสีเส้น">'
+    : '';
+  var legend = '';
+  if (l.kind === 'suit') {
+    legend = '<div class="suit-legend" id="legend-'+key+'" style="display:none">' +
+      ['S1','S2','S3','N'].map(function(s) {
+        return '<span class="legend-chip"><span class="legend-dot" style="background:'+l.suitColors[s]+'"></span>'+s+' '+KPP_SUIT_LABEL[s]+'</span>';
+      }).join('') +
+    '</div>';
+  }
+  return '<div class="layer-row">' + swatch +
+    '<label class="layer-label" style="cursor:pointer">' +
+      '<input type="checkbox" id="chkgeo-'+key+'" onchange="toggleGeoLayer(\''+key+'\',this.checked)" style="margin-right:6px">'+l.name+
+    '</label>' + colorPicker +
+    '<input type="range" class="layer-opacity" min="0" max="1" step="0.1" value="0.8" oninput="setGeoOpacity(\''+key+'\',+this.value)">' +
+  '</div>' + legend;
+}
+function _geoGroupHtml(title, keys) {
+  return '<div class="layer-section-title" style="margin-top:10px;padding:4px 0;font-size:12px;font-weight:700;color:var(--c-text-sub);border-top:1px solid var(--c-border)">'+title+'</div>' +
+    keys.map(_geoRowHtml).join('');
+}
 
 PAGES.map = async function() {
   var c = document.getElementById('content');
@@ -2957,26 +3017,12 @@ PAGES.map = async function() {
               '<input type="range" class="layer-opacity" min="0" max="1" step="0.1" value="'+l.opacity+'" oninput="setWmsOpacity(\''+k+'\',+this.value)">' +
             '</div>';
           }).join('') +
-          '<div class="layer-section-title" style="margin-top:10px;padding:4px 0;font-size:12px;font-weight:700;color:var(--c-text-sub);border-top:1px solid var(--c-border)">📌 GeoJSON (จากโฟลเดอร์แผนที่)</div>' +
-          Object.keys(GEO_LAYERS).map(function(k) {
-            var l = GEO_LAYERS[k];
-            var swatch = l.color
-              ? '<div class="layer-color" style="background:'+l.color+'"></div>'
-              : '<div class="layer-color" style="background:linear-gradient(135deg,#2e7d32 33%,#f9a825 33% 66%,#c62828 66%)"></div>';
-            return '<div class="layer-row">' + swatch +
-              '<label class="layer-label" style="cursor:pointer">' +
-                '<input type="checkbox" id="chkgeo-'+k+'" onchange="toggleGeoLayer(\''+k+'\',this.checked)" style="margin-right:6px">'+l.name+
-              '</label>' +
-              '<input type="range" class="layer-opacity" min="0" max="1" step="0.1" value="0.8" oninput="setGeoOpacity(\''+k+'\',+this.value)">' +
-            '</div>';
-          }).join('') +
+          _geoGroupHtml('📌 เขตการปกครอง (ปรับสีเส้นได้)', ['province','districts','tambons']) +
+          _geoGroupHtml('🌾 ความเหมาะสมพืชเศรษฐกิจ', ['cassava','maize','rice','sugarcane']) +
+          _geoGroupHtml('🟤 ข้อมูลดิน (กรมพัฒนาที่ดิน)', ['soilgroup','soilseries']) +
+          '<div class="wms-note" style="margin-top:2px">สีของกลุ่มชุดดิน/ชุดดินสุ่มตามรหัส — แตะรูปหลายเหลี่ยมบนแผนที่เพื่อดูรายละเอียด</div>' +
+          _geoGroupHtml('📍 ข้อมูลอ้างอิง', ['registered_cassava','schools','villages']) +
           '<div class="wms-note" style="margin-top:4px">⚠️ ชั้นข้อมูล WMS จาก<br>กรมพัฒนาที่ดิน (agri-map-online.moac.go.th)<br>ต้องมีอินเทอร์เน็ตและ WMS ต้องเปิดให้บริการ</div>' +
-          '<div class="soil-legend" style="margin-top:8px">' +
-            '<div class="legend-item"><div class="legend-dot" style="background:#2e8035"></div>S1 เหมาะสมมาก</div>' +
-            '<div class="legend-item"><div class="legend-dot" style="background:#8bc34a"></div>S2 เหมาะสมปานกลาง</div>' +
-            '<div class="legend-item"><div class="legend-dot" style="background:#f9a825"></div>S3 เหมาะสมน้อย</div>' +
-            '<div class="legend-item"><div class="legend-dot" style="background:#d32f2f"></div>N ไม่เหมาะสม</div>' +
-          '</div>' +
         '</div>' +
       '</div>' +
     '</div>';
@@ -3100,10 +3146,20 @@ function _addGeoLayerToMap(key, data) {
   var cfg = GEO_LAYERS[key];
   if (_geoLayers[key]) _mapObj.removeLayer(_geoLayers[key]);
   _geoLayers[key] = L.geoJSON(data, {
+    pointToLayer: function(feature, latlng) {
+      return L.circleMarker(latlng, { radius: 5, color: '#fff', weight: 1.5, fillColor: cfg.color, fillOpacity: 0.9 });
+    },
     style: function(feature) {
-      if (key === 'cassava') {
-        var c = (feature.properties && feature.properties.color) || '#888';
+      var p = feature.properties || {};
+      if (cfg.kind === 'suit' || cfg.kind === 'soil') {
+        var c = p.color || '#888';
         return { color: c, fillColor: c, weight: 0.5, opacity: 0.8, fill: true, fillOpacity: 0.55 };
+      }
+      if (cfg.kind === 'area') {
+        return { color: cfg.color, fillColor: cfg.color, weight: 1, opacity: 0.85, fill: true, fillOpacity: 0.35 };
+      }
+      if (cfg.kind === 'point') {
+        return { color: '#fff', weight: 1.5, opacity: 1, fill: true, fillColor: cfg.color, fillOpacity: 0.9 };
       }
       return { color: cfg.color, weight: cfg.weight, opacity: 0.85, fill: false, dashArray: cfg.dash || null };
     },
@@ -3121,11 +3177,40 @@ function _addGeoLayerToMap(key, data) {
         );
       } else if (key === 'tambons') {
         layer.bindTooltip('<b>ต.' + esc(p.name_th || p.name_en || '') + '</b>', { sticky: true, className: 'geo-tooltip' });
-      } else if (key === 'cassava') {
+      } else if (cfg.kind === 'suit') {
         var suit = p.suit || 'N';
         layer.bindTooltip(
-          '<b style="color:' + (p.color||'#888') + '">' + suit + '</b> ' + (KPP_SUIT_LABEL[suit] || '') +
+          '<b style="color:' + (p.color||'#888') + '">' + suit + '</b> ' + (KPP_SUIT_LABEL[suit] || '') + ' (' + cfg.cropLabel + ')' +
           (p.rai ? '<br><small>' + p.rai + ' ไร่</small>' : ''),
+          { sticky: true, className: 'geo-tooltip' }
+        );
+      } else if (key === 'soilgroup') {
+        layer.bindTooltip(
+          '<b>กลุ่มชุดดิน ' + esc(p.soilgroup||'') + '</b>' +
+          (p.tambon ? '<br><small>ต.' + esc(p.tambon) + ' อ.' + esc(p.amphoe||'') + '</small>' : '') +
+          (p.texture ? '<br><small>เนื้อดิน: ' + esc(p.texture) + '</small>' : '') +
+          (p.ph ? '<br><small>pH: ' + esc(p.ph) + '</small>' : ''),
+          { sticky: true, className: 'geo-tooltip' }
+        );
+      } else if (key === 'soilseries') {
+        layer.bindTooltip(
+          '<b>ชุดดิน ' + esc(p.soilseries||'') + '</b> ' + esc(p.seriesname||'') +
+          '<br><small>กลุ่มชุดดิน ' + esc(p.soilgroup||'') + ' · อ.' + esc(p.amphoe||'') + '</small>' +
+          (p.fertility ? '<br><small>ความอุดมสมบูรณ์: ' + esc(p.fertility) + '</small>' : ''),
+          { sticky: true, className: 'geo-tooltip' }
+        );
+      } else if (key === 'registered_cassava') {
+        layer.bindTooltip(
+          '<b>แปลงขึ้นทะเบียน</b> ต.' + esc(p.tambon||'') + ' อ.' + esc(p.amphoe||'') +
+          (p.rai ? '<br><small>' + p.rai + ' ไร่</small>' : '') +
+          (p.start_period ? '<br><small>ปลูก: ' + esc(p.start_period) + '</small>' : '') +
+          (p.harvest_period ? '<br><small>เก็บเกี่ยว: ' + esc(p.harvest_period) + '</small>' : ''),
+          { sticky: true, className: 'geo-tooltip' }
+        );
+      } else if (key === 'schools' || key === 'villages') {
+        layer.bindTooltip(
+          '<b>' + esc(p.name||'') + '</b>' +
+          (p.tambon ? '<br><small>ต.' + esc(p.tambon) + ' อ.' + esc(p.amphoe||'') + '</small>' : ''),
           { sticky: true, className: 'geo-tooltip' }
         );
       }
@@ -3144,12 +3229,23 @@ function toggleGeoLayer(key, on) {
   } else {
     if (_geoLayers[key]) _mapObj.removeLayer(_geoLayers[key]);
   }
+  var legend = document.getElementById('legend-' + key);
+  if (legend) legend.style.display = on ? 'flex' : 'none';
 }
 
 function setGeoOpacity(key, val) {
   if (_geoLayers[key]) {
     _geoLayers[key].setStyle({ opacity: val, fillOpacity: val * 0.7 });
   }
+}
+
+function setGeoColor(key, hex) {
+  GEO_LAYERS[key].color = hex;
+  localStorage.setItem('geoColor_' + key, hex);
+  if (_geoLayers[key]) _geoLayers[key].setStyle({ color: hex });
+  var row = document.querySelector('#chkgeo-' + key);
+  var swatch = row && row.closest('.layer-row').querySelector('.layer-color');
+  if (swatch) swatch.style.background = hex;
 }
 
 // PAGES.track removed — QR Scanner page eliminated (Phase 1)
