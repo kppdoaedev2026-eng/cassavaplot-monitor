@@ -84,7 +84,9 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .btn-ghost{background:transparent;color:var(--c-text-sub);border:2px solid var(--c-border)}
 .btn-sm{height:40px;padding:0 16px;font-size:15px}
 .btn-icon{width:var(--btn-h);height:var(--btn-h);padding:0;border-radius:50%}
-.btn[disabled]{opacity:.5;pointer-events:none}
+.btn[disabled]{opacity:.75;pointer-events:none}
+.btn[disabled]::after{content:'';width:15px;height:15px;flex-shrink:0;border-radius:50%;border:2px solid rgba(0,0,0,.15);border-top-color:currentColor;animation:btnSpin .6s linear infinite}
+@keyframes btnSpin{to{transform:rotate(360deg)}}
 
 /* ── APP SHELL ── */
 #shell{display:none;height:100%;overflow:hidden}
@@ -146,8 +148,14 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .bn-approve-badge{top:-4px;right:-8px;font-size:10px;height:17px;min-width:17px}
 
 /* ── MODAL ── */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;display:flex;align-items:flex-end;justify-content:center}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;display:flex;align-items:flex-end;justify-content:center;opacity:1;transition:opacity .22s ease}
+.modal-overlay.hide{opacity:0;pointer-events:none;visibility:hidden}
+#modalOverlay.hide{display:flex!important}
 @media(min-width:600px){.modal-overlay{align-items:center}}
+.modal-overlay:not(.hide) .modal{animation:modalIn .26s cubic-bezier(.2,.8,.3,1)}
+.modal-overlay.closing .modal{animation:modalOut .18s ease forwards}
+@keyframes modalIn{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes modalOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(16px) scale(.97)}}
 .modal{background:#fff;border-radius:24px 24px 0 0;width:100%;max-height:92vh;overflow:hidden;display:flex;flex-direction:column}
 @media(min-width:600px){.modal{border-radius:var(--r-lg);max-width:600px;max-height:88vh}}
 .modal-header{display:flex;align-items:center;gap:12px;padding:20px 20px 16px;border-bottom:1px solid var(--c-border);flex-shrink:0}
@@ -485,6 +493,17 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .exec-section-title{font-family:'Kanit',sans-serif;font-size:15px;font-weight:700;color:var(--c-primary);display:flex;align-items:center;gap:8px;padding-bottom:8px;border-bottom:2px solid var(--c-primary);margin-bottom:14px}
 .exec-section-title-line{flex:1;height:1px;background:var(--c-border);margin-left:8px}
 
+/* AI-generated executive summary */
+.ai-exec-card{background:#fff;border:1px solid var(--c-border);border-left:4px solid #6a4fb3;border-radius:var(--r-sm);padding:16px 18px;margin-bottom:16px;box-shadow:var(--shadow);animation:fadeSlideUp .3s ease}
+.ai-exec-card .exec-section-title{color:#6a4fb3;border-bottom-color:#6a4fb3}
+.ai-exec-text p{margin:0 0 8px;font-size:14px;line-height:1.7;color:var(--c-text)}
+.ai-exec-text p:last-child{margin-bottom:0}
+.ai-exec-heading{font-family:'Kanit',sans-serif;font-weight:700;font-size:14.5px;color:#6a4fb3;margin:12px 0 6px}
+.ai-exec-heading:first-child{margin-top:0}
+.ai-exec-list{margin:0 0 8px;padding-left:20px}
+.ai-exec-list li{font-size:14px;line-height:1.7;margin-bottom:3px;color:var(--c-text)}
+.ai-exec-caption{font-size:11px;color:var(--c-text-mute);margin-top:10px;padding-top:8px;border-top:1px dashed var(--c-border);display:flex;align-items:center;gap:6px}
+
 /* Executive KPI cards */
 .exec-kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
 @media(min-width:600px){.exec-kpi-grid{grid-template-columns:repeat(6,1fr)}}
@@ -636,6 +655,14 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
   .exec-section{page-break-inside:avoid;margin-bottom:12px!important}
   .exec-section-title{font-size:10px!important;margin-bottom:6px!important;
     color:#1b3a6b!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  /* AI summary */
+  .ai-exec-card{page-break-inside:avoid;box-shadow:none!important;border:1px solid #ccc!important;
+    border-left:3px solid #6a4fb3!important;padding:8px 10px!important;margin-bottom:10px!important;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .ai-exec-card .exec-section-title{color:#6a4fb3!important}
+  .ai-exec-text p,.ai-exec-list li{font-size:9px!important;color:#111!important}
+  .ai-exec-heading{font-size:10px!important;color:#6a4fb3!important}
+  .ai-exec-caption{font-size:8px!important;color:#333!important}
   /* Charts */
   .exec-chart-row{grid-template-columns:1fr 1fr!important;gap:6px!important;page-break-inside:avoid}
   .exec-chart-card,.card{box-shadow:none!important;border:1px solid #ccc!important;page-break-inside:avoid;padding:8px!important}
@@ -835,7 +862,7 @@ button,.btn,.nav-item,.bn-item,.list-item,.tab-btn,.login-tab-btn,
   .plot-report-title-block{flex:1}
   .plot-report-org{font-size:13px;font-weight:700;color:#1b3a6b;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .plot-report-main-title{font-size:15px;font-weight:700;color:#1b3a6b;margin-top:6px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .plot-report-meta-block{text-align:right;font-size:10px;color:#555}
+  .plot-report-meta-block{text-align:right;font-size:10px;color:#222;font-weight:600}
   .plot-report-section{margin-bottom:14px;page-break-inside:avoid}
   .plot-report-section-title{
     font-size:11px;font-weight:700;color:#fff;background:#1b3a6b;
@@ -845,7 +872,7 @@ button,.btn,.nav-item,.bn-item,.list-item,.tab-btn,.login-tab-btn,
   .plot-report-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:0}
   .plot-report-row{display:flex;gap:8px;font-size:9px;padding:3px 6px;border-bottom:1px solid #e8e8e8}
   .plot-report-row:nth-child(even){background:#f7f9fc;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .plot-report-key{color:#555;min-width:130px;flex-shrink:0;font-size:9px}
+  .plot-report-key{color:#333;font-weight:600;min-width:130px;flex-shrink:0;font-size:9px}
   .plot-report-val{font-weight:600;font-size:9px}
   .plot-report-table{width:100%;border-collapse:collapse;font-size:9px;margin-top:4px}
   .plot-report-table th{
@@ -859,10 +886,10 @@ button,.btn,.nav-item,.bn-item,.list-item,.tab-btn,.login-tab-btn,
   .plot-report-pass{color:#2e7d32;font-weight:700;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .plot-report-footer{
     margin-top:20px;border-top:1.5px solid #ccc;padding-top:8px;
-    font-size:9px;color:#777;display:flex;justify-content:space-between
+    font-size:9px;color:#333;font-weight:600;display:flex;justify-content:space-between
   }
   .plot-report-divider{border:none;border-top:1px dashed #ccc;margin:10px 0}
-  .plot-report-no-data{font-size:9px;color:#999;padding:6px 0;font-style:italic}
+  .plot-report-no-data{font-size:9px;color:#555;padding:6px 0;font-style:italic}
 }
 </style>
 </head>
@@ -1447,9 +1474,11 @@ PAGES.report = async function() {
     /* ─ Action bar ─ */
     '<div class="exec-action-bar no-print">' +
       '<span style="font-family:Kanit;font-weight:700;font-size:14px;color:var(--c-primary);flex:1">📋 รายงานผู้บริหาร</span>' +
+      '<button class="btn btn-accent btn-sm" id="aiExecBtn" onclick="generateAiExecSummary()">🤖 สรุปโดย AI</button>' +
       '<button class="btn btn-ghost btn-sm" onclick="exportReportCSV()">📥 CSV</button>' +
       '<button class="btn btn-primary btn-sm" onclick="window.print()">🖨️ พิมพ์/PDF</button>' +
     '</div>' +
+    '<div id="aiExecSummary"></div>' +
     /* ─ Filter ─ */
     '<div class="report-filter-card no-print">' +
       '<div style="font-family:Kanit;font-weight:700;font-size:14px;margin-bottom:10px;color:var(--c-primary)">🔽 กรองข้อมูล</div>' +
@@ -1520,6 +1549,50 @@ async function loadExecReport() {
   if (ghArea)  ghArea.textContent  = (s.totalArea||0).toLocaleString()+' ไร่';
   if (ghDist)  ghDist.textContent  = (s.districtCount||0)+' อำเภอ';
   renderExecTab(_execTab, res);
+  var box = document.getElementById('aiExecSummary');
+  if (box) box.innerHTML = '';
+}
+
+// ── AI executive summary (Gemini) ──────────────────────────────
+function _mdLite(text) {
+  var lines = esc(text || '').split('\n');
+  var html = '', inList = false;
+  lines.forEach(function(raw) {
+    var line = raw.trim();
+    if (!line) { if (inList) { html += '</ul>'; inList = false; } return; }
+    line = line.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+    if (/^[-*•]\s+/.test(line)) {
+      if (!inList) { html += '<ul class="ai-exec-list">'; inList = true; }
+      html += '<li>' + line.replace(/^[-*•]\s+/, '') + '</li>';
+    } else {
+      if (inList) { html += '</ul>'; inList = false; }
+      if (/^(\d+[.)]|#{1,3})\s*.{1,40}$/.test(line) && !/[.!?]$/.test(line)) {
+        html += '<div class="ai-exec-heading">' + line.replace(/^#{1,3}\s*/, '') + '</div>';
+      } else {
+        html += '<p>' + line + '</p>';
+      }
+    }
+  });
+  if (inList) html += '</ul>';
+  return html;
+}
+
+async function generateAiExecSummary() {
+  var btn = document.getElementById('aiExecBtn');
+  var box = document.getElementById('aiExecSummary');
+  if (!btn || !box) return;
+  var origLabel = btn.textContent;
+  btn.disabled = true; btn.textContent = 'AI กำลังวิเคราะห์…';
+  var res = await API.call('api_aiGenerateReport', { year: val('rf-year'), district: val('rf-district') });
+  btn.disabled = false; btn.textContent = origLabel;
+  if (!res.ok) { showToast(res.error || 'AI สรุปผลไม่สำเร็จ', 'error'); return; }
+  box.innerHTML =
+    '<div class="ai-exec-card">' +
+      '<div class="exec-section-title">🤖 บทสรุปผู้บริหารโดย AI<span class="exec-section-title-line"></span></div>' +
+      '<div class="ai-exec-text">' + _mdLite(res.text) + '</div>' +
+      '<div class="ai-exec-caption">✨ สร้างโดย Google Gemini จากข้อมูลตามตัวกรองด้านบน ณ ' + formatDate(new Date().toISOString().slice(0,10)) + ' — โปรดตรวจทานก่อนเผยแพร่</div>' +
+    '</div>';
+  showToast('AI สรุปผลสำเร็จ', 'success');
 }
 
 function renderExecTab(tab, data) {
@@ -3523,9 +3596,19 @@ function openModal(title, body, footerHtml) {
   var mf = document.getElementById('modalFooter');
   if (footerHtml) { mf.innerHTML = footerHtml; mf.classList.remove('hide'); }
   else { mf.classList.add('hide'); }
-  document.getElementById('modalOverlay').classList.remove('hide');
+  var ov = document.getElementById('modalOverlay');
+  ov.classList.remove('closing');
+  ov.classList.remove('hide');
 }
-function closeModal() { document.getElementById('modalOverlay').classList.add('hide'); }
+function closeModal() {
+  var ov = document.getElementById('modalOverlay');
+  if (ov.classList.contains('hide')) return;
+  ov.classList.add('closing');
+  setTimeout(function() {
+    ov.classList.add('hide');
+    ov.classList.remove('closing');
+  }, 180);
+}
 
 // ═══════════════════════════════════════════════
 // TOAST
