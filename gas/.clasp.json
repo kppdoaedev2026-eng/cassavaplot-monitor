@@ -1,0 +1,5 @@
+{
+  "scriptId": "YOUR_SCRIPT_ID_HERE",
+  "rootDir": ".",
+  "filePushOrder": ["appsscript.json", "Code.gs", "Index.html"]
+}

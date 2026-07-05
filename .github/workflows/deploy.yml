@@ -1,0 +1,74 @@
+name: Deploy to Google Apps Script
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'gas/**'
+
+  # Manual trigger
+  workflow_dispatch:
+
+jobs:
+  deploy-gas:
+    name: Push to Google Apps Script
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install clasp
+        run: npm install -g @google/clasp
+
+      - name: Authenticate clasp with service credentials
+        # Store CLASPRC_JSON as a GitHub Secret:
+        # Settings → Secrets → Actions → New repository secret
+        # Name: CLASPRC_JSON
+        # Value: contents of your ~/.clasprc.json after running: clasp login
+        run: |
+          echo '${{ secrets.CLASPRC_JSON }}' > ~/.clasprc.json
+          chmod 600 ~/.clasprc.json
+
+      - name: Push code to GAS
+        run: |
+          cd gas
+          clasp push --force
+
+      - name: Create new GAS deployment version
+        run: |
+          cd gas
+          SCRIPT_ID=$(node -e "console.log(require('./.clasp.json').scriptId)")
+          VERSION=$(clasp version "Deploy from GitHub Actions - $(date +'%Y-%m-%d %H:%M')" 2>&1 | grep -oP 'Created version \K[0-9]+' || echo "")
+          echo "New GAS version: $VERSION"
+
+  deploy-pages:
+    name: Deploy GeoJSON to GitHub Pages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Deploy entire repo root → geojson/ folder accessible at:
+          # https://YOUR_USERNAME.github.io/YOUR_REPO/geojson/kpp_province.geojson
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

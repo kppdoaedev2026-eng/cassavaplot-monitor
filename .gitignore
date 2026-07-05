@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large GeoJSON (full detail — too big for git)
+geojson/kpp_cassava_suit.geojson
+
+# clasp credentials — ห้าม commit
+gas/.clasprc.json
+.clasprc.json
