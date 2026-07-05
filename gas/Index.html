@@ -45,6 +45,9 @@ button{cursor:pointer;font-family:inherit;font-size:inherit;border:none;backgrou
 .login-card{background:#fff;border-radius:24px;padding:32px 24px;width:100%;max-width:420px;box-shadow:var(--shadow-lg)}
 .login-logo{text-align:center;margin-bottom:24px}
 .login-logo-doae{display:block;height:56px;margin:0 auto 6px}
+.topbar-doae-logo{height:32px;width:auto;flex-shrink:0;border-radius:6px;background:#fff;padding:2px;box-shadow:0 2px 6px rgba(0,0,0,.28)}
+.sn-header-doae-logo{height:44px;width:auto;flex-shrink:0}
+.sn-footer-doae-logo{height:36px;width:auto;flex-shrink:0}
 .login-logo-icon{font-size:56px;margin-bottom:8px}
 .login-logo-title{font-family:'Kanit',sans-serif;font-size:22px;font-weight:700;color:var(--c-primary)}
 .login-logo-sub{font-size:14px;color:var(--c-text-sub);margin-top:4px}
@@ -276,7 +279,6 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .sidenav.collapsed .sn-footer{padding:10px 0;text-align:center}
 .sidenav.collapsed .sn-footer-dept,.sidenav.collapsed .sn-footer-dev{display:none}
 .sidenav.collapsed .sn-footer-logo{justify-content:center;margin-bottom:0}
-.doae-svg-logo{flex-shrink:0}
 
 /* ── GLOBAL SEARCH OVERLAY ── */
 .topbar-search-btn{background:none;border:none;color:#fff;font-size:22px;padding:8px;border-radius:8px;cursor:pointer;opacity:.85;transition:opacity .2s}
@@ -750,8 +752,8 @@ button,.btn,.nav-item,.bn-item,.list-item,.tab-btn,.login-tab-btn,
 /* Cover photo reveal */
 .cover-hero-img{animation:heroImgReveal .5s ease both}
 /* DoAE seal hover */
-.doae-svg-logo{transition:transform .3s ease}
-.doae-svg-logo:hover{transform:rotate(6deg) scale(1.08)}
+.topbar-doae-logo,.sn-header-doae-logo,.sn-footer-doae-logo,.login-logo-doae{transition:transform .3s ease}
+.topbar-doae-logo:hover,.sn-header-doae-logo:hover,.sn-footer-doae-logo:hover{transform:rotate(6deg) scale(1.08)}
 /* Nav item transition */
 .nav-item{transition:background .15s,color .15s,padding-left .15s}
 /* Form section entrance */
@@ -967,74 +969,7 @@ button,.btn,.nav-item,.bn-item,.list-item,.tab-btn,.login-tab-btn,
     <div class="topbar-inner">
       <button class="topbar-toggle" onclick="toggleSidebar()">☰</button>
       <a class="topbar-brand" onclick="go('dashboard')">
-        <svg width="32" height="32" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.28)">
-          <circle cx="100" cy="100" r="100" fill="#1a5e20"/>
-          <circle cx="100" cy="100" r="97" fill="none" stroke="#f9a825" stroke-width="1.5"/>
-          <circle cx="100" cy="100" r="94" fill="none" stroke="#f9a825" stroke-width=".8" opacity=".7"/>
-          <g stroke="#f9a825" stroke-width="3" opacity=".9">
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(0,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(15,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(30,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(45,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(60,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(75,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(90,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(105,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(120,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(135,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(150,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(165,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(180,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(195,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(210,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(225,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(240,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(255,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(270,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(285,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(300,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(315,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(330,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(345,100,100)"/>
-          </g>
-          <circle cx="100" cy="100" r="79" fill="#fff"/>
-          <circle cx="100" cy="100" r="80" fill="none" stroke="#f9a825" stroke-width="2"/>
-          <path d="M27 131 A79 79 0 0 0 173 131 Z" fill="#1a5e20"/>
-          <!-- Naga serpents — gold (เงือก/นาค) -->
-          <path d="M43 117 C58 130 142 130 157 117" fill="none" stroke="#f9a825" stroke-width="7.5" stroke-linecap="round"/>
-          <ellipse cx="39" cy="114" rx="10" ry="7" fill="#f9a825" transform="rotate(-25,39,114)"/>
-          <ellipse cx="35" cy="111" rx="6" ry="4" fill="#fef3c7" transform="rotate(-25,35,111)"/>
-          <ellipse cx="161" cy="114" rx="10" ry="7" fill="#f9a825" transform="rotate(25,161,114)"/>
-          <ellipse cx="165" cy="111" rx="6" ry="4" fill="#fef3c7" transform="rotate(25,165,111)"/>
-          <!-- Side flame ornaments (กนก/เปลวไฟประดับ) -->
-          <path d="M53 108 Q43 96 47 81 Q51 67 62 71 Q53 84 56 97Z" fill="#f9a825" opacity=".85"/>
-          <path d="M51 121 Q41 110 45 98 Q49 86 59 89 Q51 103 52 114Z" fill="#f9a825" opacity=".6"/>
-          <path d="M147 108 Q157 96 153 81 Q149 67 138 71 Q147 84 144 97Z" fill="#f9a825" opacity=".85"/>
-          <path d="M149 121 Q159 110 155 98 Q151 86 141 89 Q149 103 148 114Z" fill="#f9a825" opacity=".6"/>
-          <!-- Orb at top (jewel/ratana) -->
-          <line x1="100" y1="52" x2="100" y2="44" stroke="#f59e0b" stroke-width="2.5"/>
-          <circle cx="100" cy="40" r="6" fill="#f59e0b"/>
-          <circle cx="100" cy="40" r="3.5" fill="#fef3c7"/>
-          <!-- Crown / headdress -->
-          <path d="M90 76 L100 50 L110 76 Q105 70 100 69 Q95 70 90 76Z" fill="#f59e0b"/>
-          <path d="M92 76 L100 60 L108 76 Q105 71 100 70 Q95 71 92 76Z" fill="#fef3c7"/>
-          <!-- Head -->
-          <circle cx="100" cy="83" r="10.5" fill="#fef3c7"/>
-          <!-- Body / torso -->
-          <path d="M88 92 Q80 105 81 118 L119 118 Q120 105 112 92 Q106 86 100 87 Q94 86 88 92Z" fill="#fef3c7"/>
-          <line x1="84" y1="108" x2="116" y2="108" stroke="#f59e0b" stroke-width="2.5"/>
-          <!-- Right arm → torch -->
-          <line x1="111" y1="95" x2="128" y2="81" stroke="#fef3c7" stroke-width="3.5" stroke-linecap="round"/>
-          <line x1="128" y1="76" x2="128" y2="86" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
-          <path d="M124 78 Q128 64 132 78 Q128 88 124 78Z" fill="#f59e0b"/>
-          <path d="M126 80 Q128 68 130 80 Q128 88 126 80Z" fill="#fef3c7"/>
-          <!-- Left arm → crops/grain -->
-          <line x1="89" y1="95" x2="72" y2="87" stroke="#fef3c7" stroke-width="3.5" stroke-linecap="round"/>
-          <!-- Legs + base -->
-          <path d="M87 117 L84 129 L97 129 L100 121 L103 129 L116 129 L113 117Z" fill="#fef3c7"/>
-          <path d="M81 129 Q100 135 119 129 L117 137 Q100 141 83 137Z" fill="#92400e"/>
-          <text x="100" y="153" text-anchor="middle" font-family="'Kanit',sans-serif" font-size="10.5" font-weight="700" fill="#fef3c7" letter-spacing=".5">กรมส่งเสริมการเกษตร</text>
-        </svg>
+        <img class="topbar-doae-logo" src="https://kppdoaedev2026-eng.github.io/cassavaplot-monitor/assets/doae_logo.png" alt="กรมส่งเสริมการเกษตร" onerror="this.style.display='none'">
         <div style="min-width:0">
           <div class="brand-name">CassavaPlot</div>
           <div class="brand-sub">Monitor • กรมส่งเสริมการเกษตร</div>
@@ -1062,65 +997,7 @@ button,.btn,.nav-item,.bn-item,.list-item,.tab-btn,.login-tab-btn,
 
   <aside class="sidenav" id="sidenav">
     <div class="sn-header">
-      <svg class="doae-svg-logo" width="44" height="44" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" title="กรมส่งเสริมการเกษตร">
-        <circle cx="100" cy="100" r="100" fill="#1a5e20"/>
-        <circle cx="100" cy="100" r="97" fill="none" stroke="#f9a825" stroke-width="1.5"/>
-        <circle cx="100" cy="100" r="94" fill="none" stroke="#f9a825" stroke-width=".8" opacity=".7"/>
-        <g stroke="#f9a825" stroke-width="3" opacity=".9">
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(0,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(15,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(30,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(45,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(60,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(75,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(90,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(105,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(120,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(135,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(150,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(165,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(180,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(195,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(210,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(225,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(240,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(255,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(270,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(285,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(300,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(315,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(330,100,100)"/>
-          <line x1="100" y1="100" x2="100" y2="4" transform="rotate(345,100,100)"/>
-        </g>
-        <circle cx="100" cy="100" r="79" fill="#fff"/>
-        <circle cx="100" cy="100" r="80" fill="none" stroke="#f9a825" stroke-width="2"/>
-        <path d="M27 131 A79 79 0 0 0 173 131 Z" fill="#1a5e20"/>
-        <path d="M43 117 C58 130 142 130 157 117" fill="none" stroke="#f9a825" stroke-width="7.5" stroke-linecap="round"/>
-        <ellipse cx="39" cy="114" rx="10" ry="7" fill="#f9a825" transform="rotate(-25,39,114)"/>
-        <ellipse cx="35" cy="111" rx="6" ry="4" fill="#fef3c7" transform="rotate(-25,35,111)"/>
-        <ellipse cx="161" cy="114" rx="10" ry="7" fill="#f9a825" transform="rotate(25,161,114)"/>
-        <ellipse cx="165" cy="111" rx="6" ry="4" fill="#fef3c7" transform="rotate(25,165,111)"/>
-        <path d="M53 108 Q43 96 47 81 Q51 67 62 71 Q53 84 56 97Z" fill="#f9a825" opacity=".85"/>
-        <path d="M51 121 Q41 110 45 98 Q49 86 59 89 Q51 103 52 114Z" fill="#f9a825" opacity=".6"/>
-        <path d="M147 108 Q157 96 153 81 Q149 67 138 71 Q147 84 144 97Z" fill="#f9a825" opacity=".85"/>
-        <path d="M149 121 Q159 110 155 98 Q151 86 141 89 Q149 103 148 114Z" fill="#f9a825" opacity=".6"/>
-        <line x1="100" y1="52" x2="100" y2="44" stroke="#f59e0b" stroke-width="2.5"/>
-        <circle cx="100" cy="40" r="6" fill="#f59e0b"/>
-        <circle cx="100" cy="40" r="3.5" fill="#fef3c7"/>
-        <path d="M90 76 L100 50 L110 76 Q105 70 100 69 Q95 70 90 76Z" fill="#f59e0b"/>
-        <path d="M92 76 L100 60 L108 76 Q105 71 100 70 Q95 71 92 76Z" fill="#fef3c7"/>
-        <circle cx="100" cy="83" r="10.5" fill="#fef3c7"/>
-        <path d="M88 92 Q80 105 81 118 L119 118 Q120 105 112 92 Q106 86 100 87 Q94 86 88 92Z" fill="#fef3c7"/>
-        <line x1="84" y1="108" x2="116" y2="108" stroke="#f59e0b" stroke-width="2.5"/>
-        <line x1="111" y1="95" x2="128" y2="81" stroke="#fef3c7" stroke-width="3.5" stroke-linecap="round"/>
-        <line x1="128" y1="76" x2="128" y2="86" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
-        <path d="M124 78 Q128 64 132 78 Q128 88 124 78Z" fill="#f59e0b"/>
-        <path d="M126 80 Q128 68 130 80 Q128 88 126 80Z" fill="#fef3c7"/>
-        <line x1="89" y1="95" x2="72" y2="87" stroke="#fef3c7" stroke-width="3.5" stroke-linecap="round"/>
-        <path d="M87 117 L84 129 L97 129 L100 121 L103 129 L116 129 L113 117Z" fill="#fef3c7"/>
-        <path d="M81 129 Q100 135 119 129 L117 137 Q100 141 83 137Z" fill="#92400e"/>
-        <text x="100" y="153" text-anchor="middle" font-family="'Kanit',sans-serif" font-size="10.5" font-weight="700" fill="#fef3c7" letter-spacing=".5">กรมส่งเสริมการเกษตร</text>
-      </svg>
+      <img class="sn-header-doae-logo" src="https://kppdoaedev2026-eng.github.io/cassavaplot-monitor/assets/doae_logo.png" alt="กรมส่งเสริมการเกษตร" title="กรมส่งเสริมการเกษตร" onerror="this.style.display='none'">
       <div class="sn-title">CassavaPlot<br><span style="font-weight:400;opacity:.7">Monitor</span></div>
     </div>
     <div class="sn-user">
@@ -1148,65 +1025,7 @@ button,.btn,.nav-item,.bn-item,.list-item,.tab-btn,.login-tab-btn,
     </button>
     <div class="sn-footer">
       <div class="sn-footer-logo">
-        <svg class="doae-svg-logo" width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="100" cy="100" r="100" fill="#1a5e20"/>
-          <circle cx="100" cy="100" r="97" fill="none" stroke="#f9a825" stroke-width="1.5"/>
-          <circle cx="100" cy="100" r="94" fill="none" stroke="#f9a825" stroke-width=".8" opacity=".7"/>
-          <g stroke="#f9a825" stroke-width="3" opacity=".9">
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(0,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(15,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(30,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(45,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(60,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(75,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(90,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(105,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(120,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(135,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(150,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(165,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(180,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(195,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(210,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(225,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(240,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(255,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(270,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(285,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(300,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(315,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(330,100,100)"/>
-            <line x1="100" y1="100" x2="100" y2="4" transform="rotate(345,100,100)"/>
-          </g>
-          <circle cx="100" cy="100" r="79" fill="#fff"/>
-          <circle cx="100" cy="100" r="80" fill="none" stroke="#f9a825" stroke-width="2"/>
-          <path d="M27 131 A79 79 0 0 0 173 131 Z" fill="#1a5e20"/>
-          <path d="M43 117 C58 130 142 130 157 117" fill="none" stroke="#f9a825" stroke-width="7.5" stroke-linecap="round"/>
-          <ellipse cx="39" cy="114" rx="10" ry="7" fill="#f9a825" transform="rotate(-25,39,114)"/>
-          <ellipse cx="35" cy="111" rx="6" ry="4" fill="#fef3c7" transform="rotate(-25,35,111)"/>
-          <ellipse cx="161" cy="114" rx="10" ry="7" fill="#f9a825" transform="rotate(25,161,114)"/>
-          <ellipse cx="165" cy="111" rx="6" ry="4" fill="#fef3c7" transform="rotate(25,165,111)"/>
-          <path d="M53 108 Q43 96 47 81 Q51 67 62 71 Q53 84 56 97Z" fill="#f9a825" opacity=".85"/>
-          <path d="M51 121 Q41 110 45 98 Q49 86 59 89 Q51 103 52 114Z" fill="#f9a825" opacity=".6"/>
-          <path d="M147 108 Q157 96 153 81 Q149 67 138 71 Q147 84 144 97Z" fill="#f9a825" opacity=".85"/>
-          <path d="M149 121 Q159 110 155 98 Q151 86 141 89 Q149 103 148 114Z" fill="#f9a825" opacity=".6"/>
-          <line x1="100" y1="52" x2="100" y2="44" stroke="#f59e0b" stroke-width="2.5"/>
-          <circle cx="100" cy="40" r="6" fill="#f59e0b"/>
-          <circle cx="100" cy="40" r="3.5" fill="#fef3c7"/>
-          <path d="M90 76 L100 50 L110 76 Q105 70 100 69 Q95 70 90 76Z" fill="#f59e0b"/>
-          <path d="M92 76 L100 60 L108 76 Q105 71 100 70 Q95 71 92 76Z" fill="#fef3c7"/>
-          <circle cx="100" cy="83" r="10.5" fill="#fef3c7"/>
-          <path d="M88 92 Q80 105 81 118 L119 118 Q120 105 112 92 Q106 86 100 87 Q94 86 88 92Z" fill="#fef3c7"/>
-          <line x1="84" y1="108" x2="116" y2="108" stroke="#f59e0b" stroke-width="2.5"/>
-          <line x1="111" y1="95" x2="128" y2="81" stroke="#fef3c7" stroke-width="3.5" stroke-linecap="round"/>
-          <line x1="128" y1="76" x2="128" y2="86" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
-          <path d="M124 78 Q128 64 132 78 Q128 88 124 78Z" fill="#f59e0b"/>
-          <path d="M126 80 Q128 68 130 80 Q128 88 126 80Z" fill="#fef3c7"/>
-          <line x1="89" y1="95" x2="72" y2="87" stroke="#fef3c7" stroke-width="3.5" stroke-linecap="round"/>
-          <path d="M87 117 L84 129 L97 129 L100 121 L103 129 L116 129 L113 117Z" fill="#fef3c7"/>
-          <path d="M81 129 Q100 135 119 129 L117 137 Q100 141 83 137Z" fill="#92400e"/>
-          <text x="100" y="153" text-anchor="middle" font-family="'Kanit',sans-serif" font-size="10.5" font-weight="700" fill="#fef3c7" letter-spacing=".5">กรมส่งเสริมการเกษตร</text>
-        </svg>
+        <img class="sn-footer-doae-logo" src="https://kppdoaedev2026-eng.github.io/cassavaplot-monitor/assets/doae_logo.png" alt="กรมส่งเสริมการเกษตร" onerror="this.style.display='none'">
         <span class="sn-footer-dept">กรมส่งเสริมการเกษตร<br>กระทรวงเกษตรและสหกรณ์</span>
       </div>
       <div class="sn-footer-dev">
